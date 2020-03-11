@@ -18,22 +18,26 @@ public class addHomeworkServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("utf-8");
-        resp.setContentType("text/html;charset=utf-8");
+        if(req == null){
+            System.out.println("none data");                                    //判断是否为空
+        }else {
+            req.setCharacterEncoding("utf-8");
+            resp.setContentType("text/html;charset=utf-8");
 
-        String homework_id = req.getParameter("homework_id");
-        String homework_title =req.getParameter("homework_title");
+            String homework_id = req.getParameter("homework_id");
+            String homework_title = req.getParameter("homework_title");
 
-        long homework_id_long = Long.valueOf(homework_id);
+            long homework_id_long = Long.valueOf(homework_id);
 
 
-        Homework homework = new Homework(homework_id_long,homework_title);
+            Homework homework = new Homework(homework_id_long, homework_title);
 
-        studentHomeworkJDBC.addHomework(homework);
+            studentHomeworkJDBC.addHomework(homework);
 
-        List<Homework> list = studentHomeworkJDBC.selectAllHomework();
-        req.setAttribute("list",list);
-        req.getRequestDispatcher("showAllHomework.jsp").forward(req,resp);
+            List<Homework> list = studentHomeworkJDBC.selectAllHomework();
+            req.setAttribute("list", list);
+            req.getRequestDispatcher("showAllHomework.jsp").forward(req, resp);
+        }
     }
 
     @Override

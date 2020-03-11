@@ -42,7 +42,7 @@
                     for(Homework homework : list){
 
             %>
-            <option value="volvo"><%=homework.getHomeworkTitle()%></option>
+            <option ><%=homework.getHomeworkTitle()%></option>
             <%
 
                     }
